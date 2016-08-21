@@ -1,0 +1,102 @@
+Generate_map <- function(){
+
+library(mapdata)
+library(ggplot2)
+library(data.table)
+
+locs <- fread("Downloads/sample2.csv", header=T)
+
+world_map<-map_data("world")
+world_map <- subset(world_map, region != "Antarctica")
+gg <- ggplot(world_map)
+
+gg<-ggplot(locs, aes(x=longitude,y=latitude))+borders("world", color="grey100", fill="grey93")+geom_point(color="green", size=1)+labs(x="",y="")+theme_bw() + theme(axis.text=element_blank(),axis.ticks=element_blank())+coord_fixed()
+
+gg <- gg + scale_x_continuous(expand=c(0,0))
+gg <- gg + scale_y_continuous(expand=c(0,0))
+gg <- gg + expand_limits(x = world_map$long, y = world_map$lat)
+gg <- gg + ggtitle("The traffic to the web-site")
+
+gg <- gg + theme(axis.text=element_blank(),
+axis.title=element_blank(),
+legend.position="none",
+axis.ticks=element_blank(),
+panel.grid=element_blank(),
+#panel.background=element_rect(color=NA,fill=NA),
+plot.background=element_rect(fill="#ABCDDCBA"))
+
+gg
+
+}
+
+
+
+Generate_map <- function(){
+    
+    library(mapdata)
+    library(ggplot2)
+    library(data.table)
+    
+    locs <- fread("~/Downloads/output(5).csv", header=T)
+    
+    world_map<-map_data("world")
+    world_map <- subset(world_map, region != "Antarctica")
+    gg <- ggplot(world_map)
+    
+    gg<-ggplot(locs, aes(x=longitude,y=latitude))+borders("world", color="grey100", fill="grey93")+geom_point(color="red", size=1)+labs(x="",y="")+theme_bw() + theme(axis.text=element_blank(),axis.ticks=element_blank())+coord_fixed()
+    
+    gg <- gg + scale_x_continuous(expand=c(0,0))
+    gg <- gg + scale_y_continuous(expand=c(0,0))
+    gg <- gg + expand_limits(x = world_map$long, y = world_map$lat)
+    gg <- gg + ggtitle("The traffic to the web-site")
+    
+    gg <- gg + theme(axis.text=element_blank(),
+                     axis.title=element_blank(),
+                     legend.position="none",
+                     axis.ticks=element_blank(),
+                     panel.grid=element_blank(),
+                     #panel.background=element_rect(color=NA,fill=NA),
+                     plot.background=element_rect(fill="#ABCDDCBA"))
+    
+    gg
+    
+}
+
+
+
+Generate_Pie <- function(){
+    hours <- read.csv("~/hours.csv")
+    slices <- c(hours[,2])
+    lbls <- c(hours[,1])
+    pie(slices, labels = lbls, main=" hour-wise traffic distribution ")
+}
+
+
+
+
+Generate_line <- function(){
+
+ggplot(data=hours, aes(x=hours, y=requests,size=1, color=1)) +
+    geom_line() +
+    scale_x_continuous( breaks=c(seq(0,23,by=1))) +
+    expand_limits(x=2) +
+    geom_point()+
+    geom_text(aes(label=requests),hjust=0, vjust=0) +
+    labs(title="Hour-wise traffic distribution throughout the dataset") 
+}
+
+
+
+###### Installing R 
+
+# sudo add-apt-repository ppa:marutter/rrutter
+
+#sudo apt-get update
+
+#sudo apt-get upgrade
+
+#sudo apt-get install r-base r-base-dev
+
+
+
+
