@@ -1,0 +1,2 @@
+# Mining-Web-Server-Logs-using-Big-Data-Technologies
+This project mines the web the web server logs which are stored in HDFS file system. Final results are visualized using R. IP address are converted into geo locations using open source ip to geo loaction data base and are plotted on world map using ggplot of R. Documentation .doc file describes the entire process and How to install Hadoop on Ubuntu with pseudo distributed mode.
